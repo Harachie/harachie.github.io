@@ -1,11 +1,26 @@
-﻿QUnit.test("ok test", function (assert) {
-    assert.ok(true, "true succeeds");
-    assert.ok("non-empty", "non-empty string succeeds");
+﻿
+QUnit.test("SmartCanvas: create empty document", function (assert) {
+    var done = assert.async();
 
-    assert.ok(false, "false fails");
-    assert.ok(0, "0 fails");
-    assert.ok(NaN, "NaN fails");
-    assert.ok("", "empty string fails");
-    assert.ok(null, "null fails");
-    assert.ok(undefined, "undefined fails");
+    function createEmptyDocument(name, displayName) {
+        var model = dsmx.model.smartServer.createModel.create();
+
+       // state.campaignName = name;
+
+        model.name = name;
+        model.displayName = displayName;
+        model.importDefaultFonts = true;
+
+        dsmx.api.smartServer.e.createDocumentTemplate(model, function (responseObject) {
+            assert.ok(responseObject > 0, "CampaignId > 0");
+            done();
+
+        }, function (eo) {
+            assert.ok(false, eo.message + ", campaign name: " + name);
+            done();
+        })
+    }
+
+    createEmptyDocument(dsmx.algorithm.createGuid().replace(/-/g, ""), "");
+    
 });

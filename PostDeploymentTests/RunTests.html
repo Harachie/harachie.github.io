@@ -4,20 +4,29 @@
     <meta charset="utf-8" />
     <link href="Content/qunit-2.6.1.css" rel="stylesheet" />
     <script src="Content/jquery-3.3.1.min.js"></script>
+    <script src="Content/dsmx.js"></script>
     <title></title>
 </head>
 <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
     <script type="text/javascript">
-        var config = {
-            "rootUrl": "",
-            "testSuite": "/Tests/SmartCanvasTests.json";
-        };
-        
-        $.getJSON(config.rootUrl + config.testSuite, function (data) {
-            runTests(data.tests);
-        });
+
+        function getFinalUrl(path) {
+            if (config.sourceSystem) {
+                return "//" + config.sourceSystem + path;
+            }
+
+            return path;
+        }
+
+        function setupDsmxConfig() {
+            dsmx.config.targetSystem = config.targetSystem;
+            dsmx.config.publicKey = config.publicKey;
+            dsmx.config.privateKey = config.privateKey;
+            dsmx.config.adminPublicKey = config.adminPublicKey;
+            dsmx.config.adminPrivateKey = config.adminPrivateKey;
+        }
 
         function appendScriptTag(url) {
             var domScriptElement;
@@ -33,13 +42,35 @@
             var testFileName;
             var domScriptElement;
 
-            appendScriptTag(config.rootUrl + "/Content/qunit-2.6.1.js");
+            appendScriptTag(getFinalUrl("/Content/qunit-2.6.1.js"));
 
             for (i = 0; i < tests.length; i++) {
                 testFileName = tests[i];
-                appendScriptTag(config.rootUrl + "/Tests/" + testFileName);
+                appendScriptTag(getFinalUrl("/Tests/" + testFileName));
             }
         }
+
+        var config = {
+            "sourceSystem": "",
+            "targetSystem": "xmg-bkr.efi.internal",
+            "testSuite": "/Tests/SmartCanvasTests.json",
+            "publicKey": "82E1F02F",
+            "privateKey": "4B8E980D67E5FDE0491A9724B90F5EAE9B642B26AC6E86B1",
+            "adminPublicKey": "",
+            "adminPrivateKey": ""
+        };
+
+        var hash = decodeURI(document.location.hash);
+
+        if (hash) {
+            hash = hash.substr(1);
+            config = JSON.parse(hash);
+        }
+
+        $.getJSON(getFinalUrl(config.testSuite), function (data) {
+            setupDsmxConfig();
+            runTests(data.tests);
+        });
     </script>
 </body>
 </html>
