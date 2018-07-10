@@ -93,8 +93,12 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\jquery-3.3.1.min.js" />
     <Content Include="Content\qunit-2.6.1.css" />
     <Content Include="Content\qunit-2.6.1.js" />
+    <Content Include="Content\require.js" />
+    <Content Include="RunTests.html" />
+    <Content Include="Tests\Test_SmartCanvas_Can_Create_Document.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +141,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <Content Include="Tests\SmartCanvasTests.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

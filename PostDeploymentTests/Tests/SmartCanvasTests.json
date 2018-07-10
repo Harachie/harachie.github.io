@@ -1,0 +1,5 @@
+﻿{
+  "tests": [
+    "Test_SmartCanvas_Can_Create_Document.js"
+  ]
+}
