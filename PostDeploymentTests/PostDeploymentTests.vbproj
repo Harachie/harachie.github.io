@@ -99,6 +99,7 @@
     <Content Include="Content\qunit-2.6.1.js" />
     <Content Include="Content\require.js" />
     <Content Include="RunTests.html" />
+    <Content Include="Tests\Test_Config_Settings.js" />
     <Content Include="Tests\Test_SmartCanvas_Can_Create_Document.js" />
     <Content Include="Web.config" />
   </ItemGroup>

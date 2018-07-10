@@ -67,6 +67,8 @@
             config = JSON.parse(hash);
         }
 
+       
+
         $.getJSON(getFinalUrl(config.testSuite), function (data) {
             setupDsmxConfig();
             runTests(data.tests);

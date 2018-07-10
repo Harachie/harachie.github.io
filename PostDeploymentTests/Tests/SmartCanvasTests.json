@@ -1,5 +1,6 @@
 ﻿{
   "tests": [
+    "Test_Config_Settings.js",
     "Test_SmartCanvas_Can_Create_Document.js"
   ]
 }
