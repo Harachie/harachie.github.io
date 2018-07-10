@@ -98,6 +98,7 @@
     <Content Include="Content\qunit-2.6.1.css" />
     <Content Include="Content\qunit-2.6.1.js" />
     <Content Include="Content\require.js" />
+    <Content Include="Content\text.js" />
     <Content Include="RunTests.html" />
     <Content Include="Tests\Test_Config_Settings.js" />
     <Content Include="Tests\Test_SmartCanvas_Can_Create_Document.js" />

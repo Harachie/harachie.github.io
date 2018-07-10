@@ -69,10 +69,27 @@
 
         QUnit.config.autostart = false;
 
-        $.getJSON(getFinalUrl(config.testSuite), function (data) {
+        requirejs.config({
+            "paths": {
+                "json": "Content/text"
+            },
+            "urlArgs": function (id, url) {
+                var args = ("c=" + (new Date()).getTime());
+                
+                return (url.indexOf('?') === -1 ? '?' : '&') + args;
+            }
+        });
+
+        require(["json!Tests/SmartCanvasTests.json"], function (json) {
+            var data = JSON.parse(json);
+
             setupDsmxConfig();
             runTests(data.tests);
         });
+
+        //$.getJSON(getFinalUrl(config.testSuite), function (data) {
+           
+        //});
     </script>
 </body>
 </html>
