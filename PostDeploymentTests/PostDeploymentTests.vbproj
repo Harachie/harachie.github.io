@@ -93,6 +93,8 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\qunit-2.6.1.css" />
+    <Content Include="Content\qunit-2.6.1.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
