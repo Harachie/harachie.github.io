@@ -1,26 +1,29 @@
-﻿
-QUnit.test("SmartCanvas: create empty document", function (assert) {
-    var done = assert.async();
+﻿define([], function () {
 
-    function createEmptyDocument(name, displayName) {
-        var model = dsmx.model.smartServer.createModel.create();
+    QUnit.test("SmartCanvas: create empty document", function (assert) {
+        var done = assert.async();
 
-       // state.campaignName = name;
+        function createEmptyDocument(name, displayName) {
+            var model = dsmx.model.smartServer.createModel.create();
 
-        model.name = name;
-        model.displayName = displayName;
-        model.importDefaultFonts = true;
+            // state.campaignName = name;
 
-        dsmx.api.smartServer.e.createDocumentTemplate(model, function (responseObject) {
-            assert.ok(responseObject > 0, "CampaignId > 0");
-            done();
+            model.name = name;
+            model.displayName = displayName;
+            model.importDefaultFonts = true;
 
-        }, function (eo) {
-            assert.ok(false, eo.message + ", campaign name: " + name);
-            done();
-        })
-    }
+            dsmx.api.smartServer.e.createDocumentTemplate(model, function (responseObject) {
+                assert.ok(responseObject > 0, "CampaignId > 0");
+                done();
 
-    createEmptyDocument(dsmx.algorithm.createGuid().replace(/-/g, ""), "");
-    
+            }, function (eo) {
+                assert.ok(false, eo.message + ", campaign name: " + name);
+                done();
+            })
+        }
+
+        createEmptyDocument(dsmx.algorithm.createGuid().replace(/-/g, ""), "");
+
+    });
+
 });

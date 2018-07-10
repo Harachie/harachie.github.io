@@ -3,8 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <link href="Content/qunit-2.6.1.css" rel="stylesheet" />
+    <script src="Content/qunit-2.6.1.js"></script>
     <script src="Content/jquery-3.3.1.min.js"></script>
     <script src="Content/dsmx.js"></script>
+    <script src="Content/require.js"></script>
     <title></title>
 </head>
 <body>
@@ -28,26 +30,24 @@
             dsmx.config.adminPrivateKey = config.adminPrivateKey;
         }
 
-        function appendScriptTag(url) {
-            var domScriptElement;
-
-            domScriptElement = document.createElement("script");
-            domScriptElement.src = url;
-            domScriptElement.async = false;
-            document.body.appendChild(domScriptElement);
-        }
-
         function runTests(tests) {
             var i;
             var testFileName;
             var domScriptElement;
+            var testsLoaded;
 
-            appendScriptTag(getFinalUrl("/Content/qunit-2.6.1.js"));
+            testsLoaded = 0;
 
             for (i = 0; i < tests.length; i++) {
                 testFileName = tests[i];
-                appendScriptTag(getFinalUrl("/Tests/" + testFileName));
-            }
+                require([getFinalUrl("/Tests/" + testFileName)], function () {
+                    testsLoaded++;
+
+                    if (testsLoaded === tests.length) {
+                        QUnit.start();
+                    }
+                });
+            }           
         }
 
         var config = {
@@ -67,7 +67,7 @@
             config = JSON.parse(hash);
         }
 
-       
+        QUnit.config.autostart = false;
 
         $.getJSON(getFinalUrl(config.testSuite), function (data) {
             setupDsmxConfig();
