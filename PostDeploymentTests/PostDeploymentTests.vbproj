@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Tools\" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -100,6 +101,7 @@
     <Content Include="Content\require.js" />
     <Content Include="Content\text.js" />
     <Content Include="RunTests.html" />
+    <Content Include="RunTests.js" />
     <Content Include="Tests\Test_Config_Settings.js" />
     <Content Include="Tests\Test_SmartCanvas_Can_Create_Document.js" />
     <Content Include="Web.config" />

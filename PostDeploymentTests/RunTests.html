@@ -50,8 +50,6 @@
             }           
         }
 
-        
-
         var config = {
             "sourceSystem": "",
             "targetSystem": "xmg-bkr.efi.internal",
@@ -72,6 +70,10 @@
         QUnit.config.autostart = false;
 
         QUnit.done(function (details) {
+            if (typeof window.callPhantom === 'function') {
+                window.callPhantom(details);
+            }
+
             console.log("Total: ", details.total, " Failed: ", details.failed, " Passed: ", details.passed, " Runtime: ", details.runtime);
         });
 
